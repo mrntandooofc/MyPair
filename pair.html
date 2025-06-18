@@ -228,6 +228,13 @@
       color: rgba(0, 0, 0, 0.5);
     }
 
+    .audio-player {
+      width: 100%;
+      margin: 20px 0;
+      display: flex;
+      justify-content: center;
+    }
+
     @media (max-width: 480px) {
       .container {
         padding: 20px;
@@ -253,6 +260,13 @@
         <a href="https://whatsapp.com/channel/0029Vb4yAGGIHphBnp4jaj2A" target="_blank" class="whatsapp"><i class="fab fa-whatsapp"></i></a>
         <a href="https://github.com/mrntandooofc/LADYBUG-MD" target="_blank" class="github"><i class="fab fa-github"></i></a>
       </div>
+    </div>
+
+    <div class="audio-player">
+      <audio controls autoplay loop>
+        <source src="https://files.catbox.moe/jvmz2c.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+      </audio>
     </div>
 
     <div class="input-group">
@@ -328,6 +342,13 @@
         console.error("Failed to copy text: ", err);
       });
     }
+
+    // Play audio when page loads
+    document.addEventListener('DOMContentLoaded', function() {
+      const audio = document.querySelector('audio');
+      audio.volume = 0.5; // Set volume to 50%
+      audio.play().catch(e => console.log("Auto-play prevented: ", e));
+    });
   </script>
 </body>
 </html>
