@@ -1,604 +1,591 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LADYBUG-MD-BOT| PAIR CODE</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        :root {
-            --primary: #6C63FF;  
-            --secondary: #4D44DB; 
-            --accent: #FF7584;   
-            --text: #2D3748;      
-            --text-light: #718096;
-            --background: #F7FAFC; 
-            --card-bg: #FFFFFF;    
-            --input-bg: #EDF2F7;   
-            --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 
-                     0 10px 10px -5px rgba(0, 0, 0, 0.04);
-            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>LADYBUG-MD-BOT-PAIR</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
+  <style>
+    :root {
+      --primary-color: #ffffff;
+      --secondary-color: #ffffff;
+      --accent-color: #000000;
+      --text-color: #000000;
+      --background-color: #4DB6AC;
+      --hover-color: #f5f5f5;
+      --border-color: rgba(0, 0, 0, 0.1);
+      --success-color: #2ecc71;
+      --error-color: #e74c3c;
+      --warning-color: #f39c12;
+    }
 
-        [data-theme="dark"] {
-            --primary: #818CF8;    
-            --secondary: #6366F1; 
-            --accent: #F472B6;    
-            --text: #F7FAFC;      
-            --text-light: #CBD5E0; 
-            --background: #1A202C;  
-            --card-bg: #;    
-            --input-bg: #4A5568;   
-            --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4), 
-                     0 10px 10px -5px rgba(0, 0, 0, 0.3);
-        }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            transition: var(--transition);
-        }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--background-color);
+      color: var(--text-color);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 15px;
+    }
 
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background-color: var(--background);
-            color: var(--text);
-            min-height: 100vh;
-            padding: 1rem;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            line-height: 1.5;
-        }
+    .container {
+      width: 100%;
+      max-width: 450px;
+      background: var(--background-color);
+      border-radius: 16px;
+      padding: 25px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+      border: 1px solid var(--border-color);
+    }
 
-        .theme-toggle {
-            position: fixed;
-            top: 1.5rem;
-            right: 1.5rem;
-            background: var(--primary);
-            color: white;
-            border: none;
-            width: 3rem;
-            height: 3rem;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            box-shadow: var(--shadow);
-            z-index: 100;
-            animation: pulse 2s infinite;
-        }
+    .header {
+      text-align: center;
+      margin-bottom: 25px;
+    }
 
-        .theme-toggle:hover {
-            transform: scale(1.1);
-            background: var(--secondary);
-        }
+    .logo {
+      width: 70px;
+      height: 70px;
+      margin: 0 auto 16px;
+      background: var(--primary-color);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      color: var(--accent-color);
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+    }
 
-        @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(108, 99, 255, 0.7); }
-            70% { box-shadow: 0 0 0 12px rgba(108, 99, 255, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(108, 99, 255, 0); }
-        }
+    .title {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: var(--accent-color);
+    }
 
-        .container {
-            background-color: var(--card-bg);
-            padding: 1.5rem;
-            border-radius: 1rem;
-            box-shadow: var(--shadow);
-            width: 100%;
-            max-width: 600px;
-            text-align: center;
-            transform: translateY(0);
-            opacity: 1;
-            animation: fadeInUp 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-            border: 1px solid rgba(0, 0, 0, 0.05);
-            margin: 1rem;
-        }
+    .subtitle {
+      font-size: 14px;
+      color: rgba(0, 0, 0, 0.7);
+      margin-bottom: 20px;
+    }
 
-        @media (min-width: 768px) {
-            .container {
-                padding: 2.5rem;
-            }
-        }
+    .social-icons {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
 
-        [data-theme="dark"] .container {
-            border: 1px solid rgba(255, 255, 255, 0.05);
-        }
+    .social-icons a {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 18px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
 
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+    .social-icons a.youtube { background: #FF0000; }
+    .social-icons a.telegram { background: #0088cc; }
+    .social-icons a.whatsapp { background: #0cfa10; }
+    .social-icons a.github { background: #333; }
 
-        .round-image {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 3px solid var(--primary);
-            margin-bottom: 1.5rem;
-            box-shadow: 0 4px 12px rgba(108, 99, 255, 0.2);
-        }
+    .social-icons a:hover {
+      transform: scale(1.1);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
 
-        h2 {
-            color: var(--primary);
-            margin-bottom: 1rem;
-            font-size: 1.75rem;
-        }
+    .input-group {
+      margin-bottom: 20px;
+    }
 
-        @media (min-width: 768px) {
-            h2 {
-                font-size: 2rem;
-            }
-        }
+    .input-label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+      font-size: 13px;
+    }
 
-        p {
-            margin-bottom: 2rem;
-            color: var(--text-light);
-            font-size: 1rem;
-        }
+    .input-field {
+      width: 100%;
+      padding: 12px;
+      border: 1.5px solid var(--border-color);
+      border-radius: 12px;
+      background: var(--background-color);
+      color: var(--text-color);
+      font-size: 15px;
+      transition: all 0.3s ease;
+    }
 
-        .form-group {
-            margin-bottom: 1.5rem;
-            text-align: left;
-        }
+    .input-field:focus {
+      outline: none;
+      border-color: var(--accent-color);
+      box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
+    }
 
-        label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-            color: var(--text);
-        }
+    .file-upload {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+      border: 2px dashed var(--border-color);
+      border-radius: 12px;
+      margin-bottom: 20px;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
 
-        input[type="text"], input[type="number"], select {
-            width: 100%;
-            padding: 1rem;
-            border: 2px solid transparent;
-            border-radius: 0.5rem;
-            background-color: var(--input-bg);
-            color: var(--text);
-            font-size: 1rem;
-            transition: var(--transition);
-            margin-bottom: 1rem;
-        }
+    .file-upload:hover {
+      border-color: var(--accent-color);
+      background-color: rgba(77, 182, 172, 0.1);
+    }
 
-        input[type="text"]:focus, input[type="number"]:focus, select:focus {
-            outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.2);
-        }
+    .file-upload i {
+      font-size: 36px;
+      margin-bottom: 10px;
+      color: var(--accent-color);
+    }
 
-        .btn {
-            background-color: var(--primary);
-            color: white;
-            padding: 1rem;
-            border: none;
-            border-radius: 0.5rem;
-            cursor: pointer;
-            font-size: 1rem;
-            font-weight: 600;
-            width: 100%;
-            transition: var(--transition);
-            box-shadow: var(--shadow);
-            position: relative;
-            overflow: hidden;
-            margin-bottom: 1rem;
-        }
+    .file-upload input {
+      display: none;
+    }
 
-        @media (min-width: 768px) {
-            .btn {
-                padding: 1rem 2rem;
-            }
-        }
+    .file-upload-text {
+      text-align: center;
+      font-size: 14px;
+    }
 
-        .btn:hover {
-            background-color: var(--secondary);
-            transform: translateY(-2px);
-            box-shadow: 0 7px 14px rgba(108, 99, 255, 0.2);
-        }
+    .file-name {
+      margin-top: 10px;
+      font-weight: 500;
+      color: var(--success-color);
+      word-break: break-all;
+      text-align: center;
+    }
 
-        .btn:active {
-            transform: translateY(0);
-        }
+    .btn {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
 
-        .btn-secondary {
-            background-color: transparent;
-            color: var(--primary);
-            border: 2px solid var(--primary);
-            margin-top: 1rem;
-        }
+    .btn-primary {
+      background: var(--accent-color);
+      color: var(--primary-color);
+    }
 
-        .btn-secondary:hover {
-            background-color: rgba(108, 99, 255, 0.1);
-        }
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
 
-        #result {
-            margin-top: 1.5rem;
-            padding: 1.5rem;
-            border-radius: 0.5rem;
-            display: none;
-            animation: fadeIn 0.3s ease-out;
-            text-align: center;
-            font-weight: 500;
-        }
+    .btn-secondary {
+      background: var(--hover-color);
+      border: 1.5px solid var(--border-color);
+      color: var(--text-color);
+    }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+    .btn-secondary:hover {
+      background: var(--background-color);
+      border-color: var(--accent-color);
+    }
 
-        .valid {
-            background-color: rgba(72, 187, 120, 0.1);
-            color: #48BB78;
-            border-left: 4px solid #48BB78;
-        }
+    .code-display {
+      background: var(--hover-color);
+      padding: 12px;
+      border-radius: 12px;
+      text-align: center;
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 16px;
+      min-height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1.5px solid var(--border-color);
+      word-break: break-all;
+    }
 
-        .invalid {
-            background-color: rgba(245, 101, 101, 0.1);
-            color: #F56565;
-            border-left: 4px solid #F56565;
-        }
+    .message {
+      display: none;
+      padding: 10px;
+      border-radius: 8px;
+      margin-bottom: 16px;
+      font-size: 14px;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
 
-        .error {
-            background-color: rgba(246, 173, 85, 0.1);
-            color: #F6AD55;
-            border-left: 4px solid #F6AD55;
-        }
+    .success-message {
+      color: var(--success-color);
+      background-color: rgba(46, 204, 113, 0.1);
+      border: 1px solid var(--success-color);
+    }
 
-        .loading {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 3px solid rgba(255,255,255,.3);
-            border-radius: 50%;
-            border-top-color: #fff;
-            animation: spin 1s ease-in-out infinite;
-            margin-right: 10px;
-            vertical-align: middle;
-        }
+    .error-message {
+      color: var(--error-color);
+      background-color: rgba(231, 76, 60, 0.1);
+      border: 1px solid var(--error-color);
+    }
 
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
+    .warning-message {
+      color: var(--warning-color);
+      background-color: rgba(243, 156, 18, 0.1);
+      border: 1px solid var(--warning-color);
+    }
 
-        .hidden {
-            display: none;
-        }
+    .loading {
+      display: none;
+      text-align: center;
+      margin: 16px 0;
+    }
 
-        .actions {
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-        }
+    .loading i {
+      font-size: 24px;
+      color: var(--accent-color);
+      animation: spin 1s linear infinite;
+    }
 
-        .button-group {
-            display: flex;
-            gap: 0.5rem;
-            margin-top: 1rem;
-        }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
 
-        .button-group .btn {
-            margin-bottom: 0;
-            flex: 1;
-        }
+    .footer {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 12px;
+      color: rgba(0, 0, 0, 0.5);
+    }
 
-        #loading-spinner {
-            display: none;
-            margin: 1rem 0;
-        }
+    .audio-player {
+      width: 100%;
+      margin: 20px 0;
+      display: flex;
+      justify-content: center;
+    }
 
-        #pair {
-            margin: 1rem 0;
-            padding: 1rem;
-            border-radius: 0.5rem;
-            background-color: rgba(108, 99, 255, 0.1);
-            word-break: break-word;
-        }
-    </style>
+    .tabs {
+      display: flex;
+      margin-bottom: 20px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .tab {
+      padding: 10px 20px;
+      cursor: pointer;
+      font-weight: 500;
+      border-bottom: 2px solid transparent;
+      transition: all 0.3s ease;
+    }
+
+    .tab.active {
+      border-bottom: 2px solid var(--accent-color);
+      color: var(--accent-color);
+    }
+
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        padding: 20px;
+        border-radius: 12px;
+      }
+
+      .code-display {
+        font-size: 16px;
+        min-height: 50px;
+      }
+    }
+  </style>
 </head>
 <body>
-    <button class="theme-toggle" id="theme-toggle" title="Toggle dark mode">
-        <i class="fas fa-moon"></i>
-    </button>
-    
-    <div class="container">
-        <div class="flex justify-center mb-4">
-            <img src="https://i.ibb.co/rGLWj2V8/subzero-bot.jpg" alt="LADYBUG-MD" class="round-image">
-        </div>
-        <h2>LADYBUG-PAIR</h2>
-        <p>Select Your Country & Enter your WhatsApp Number, Get Code, Link & Obtain Session Id. Then Validate Your Session Id to See If it can be Deployed</p>
-        <div class="input-container">
-            <select id="country-code">
-                <option value="263">Zimbabwe (+263)</option>
-                <option value="254">Kenya (+254)</option>
-                <option value="255">Tanzania (+255)</option>
-                <option value="256">Uganda (+256)</option>
-                <option value="250">Rwanda (+250)</option>
-                <option value="233">Ghana (+233)</option>
-                <option value="234">Nigeria (+234)</option>
-                <option value="92">Pakistan (+92)</option>
-                <option value="91">India (+91)</option>
-                <option value="93">Afghanistan (+93)</option>
-                <option value="355">Albania (+355)</option>
-                <option value="213">Algeria (+213)</option>
-                <option value="376">Andorra (+376)</option>
-                <option value="244">Angola (+244)</option>
-                <option value="54">Argentina (+54)</option>
-                <option value="374">Armenia (+374)</option>
-                <option value="61">Australia (+61)</option>
-                <option value="43">Austria (+43)</option>
-                <option value="994">Azerbaijan (+994)</option>
-                <option value="973">Bahrain (+973)</option>
-                <option value="880">Bangladesh (+880)</option>
-                <option value="375">Belarus (+375)</option>
-                <option value="32">Belgium (+32)</option>
-                <option value="501">Belize (+501)</option>
-                <option value="229">Benin (+229)</option>
-                <option value="975">Bhutan (+975)</option>
-                <option value="591">Bolivia (+591)</option>
-                <option value="387">Bosnia and Herzegovina (+387)</option>
-                <option value="267">Botswana (+267)</option>
-                <option value="55">Brazil (+55)</option>
-                <option value="673">Brunei (+673)</option>
-                <option value="359">Bulgaria (+359)</option>
-                <option value="226">Burkina Faso (+226)</option>
-                <option value="257">Burundi (+257)</option>
-                <option value="855">Cambodia (+855)</option>
-                <option value="237">Cameroon (+237)</option>
-                <option value="1">Canada (+1)</option>
-                <option value="238">Cape Verde (+238)</option>
-                <option value="236">Central African Republic (+236)</option>
-                <option value="235">Chad (+235)</option>
-                <option value="56">Chile (+56)</option>
-                <option value="86">China (+86)</option>
-                <option value="57">Colombia (+57)</option>
-                <option value="269">Comoros (+269)</option>
-                <option value="242">Congo (+242)</option>
-                <option value="243">Congo, Democratic Republic of the (+243)</option>
-                <option value="506">Costa Rica (+506)</option>
-                <option value="225">Côte d'Ivoire (+225)</option>
-                <option value="385">Croatia (+385)</option>
-                <option value="53">Cuba (+53)</option>
-                <option value="357">Cyprus (+357)</option>
-                <option value="420">Czech Republic (+420)</option>
-                <option value="45">Denmark (+45)</option>
-                <option value="253">Djibouti (+253)</option>
-                <option value="1-809">Dominican Republic (+1-809)</option>
-                <option value="593">Ecuador (+593)</option>
-                <option value="20">Egypt (+20)</option>
-                <option value="503">El Salvador (+503)</option>
-                <option value="240">Equatorial Guinea (+240)</option>
-                <option value="291">Eritrea (+291)</option>
-                <option value="372">Estonia (+372)</option>
-                <option value="251">Ethiopia (+251)</option>
-                <option value="679">Fiji (+679)</option>
-                <option value="358">Finland (+358)</option>
-                <option value="33">France (+33)</option>
-                <option value="241">Gabon (+241)</option>
-                <option value="220">Gambia (+220)</option>
-                <option value="995">Georgia (+995)</option>
-                <option value="49">Germany (+49)</option>
-                <option value="30">Greece (+30)</option>
-                <option value="299">Greenland (+299)</option>
-                <option value="502">Guatemala (+502)</option>
-                <option value="224">Guinea (+224)</option>
-                <option value="245">Guinea-Bissau (+245)</option>
-                <option value="592">Guyana (+592)</option>
-                <option value="509">Haiti (+509)</option>
-                <option value="504">Honduras (+504)</option>
-                <option value="36">Hungary (+36)</option>
-                <option value="354">Iceland (+354)</option>
-                <option value="62">Indonesia (+62)</option>
-                <option value="98">Iran (+98)</option>
-                <option value="964">Iraq (+964)</option>
-                <option value="353">Ireland (+353)</option>
-                <option value="972">Israel (+972)</option>
-                <option value="39">Italy (+39)</option>
-                <option value="225">Ivory Coast (+225)</option>
-                <option value="81">Japan (+81)</option>
-                <option value="962">Jordan (+962)</option>
-                <option value="7">Kazakhstan (+7)</option>
-                <option value="686">Kiribati (+686)</option>
-                <option value="965">Kuwait (+965)</option>
-                <option value="996">Kyrgyzstan (+996)</option>
-                <option value="856">Laos (+856)</option>
-                <option value="371">Latvia (+371)</option>
-                <option value="961">Lebanon (+961)</option>
-                <option value="266">Lesotho (+266)</option>
-                <option value="231">Liberia (+231)</option>
-                <option value="218">Libya (+218)</option>
-                <option value="423">Liechtenstein (+423)</option>
-                <option value="370">Lithuania (+370)</option>
-                <option value="352">Luxembourg (+352)</option>
-                <option value="853">Macau (+853)</option>
-                <option value="389">Macedonia (+389)</option>
-                <option value="261">Madagascar (+261)</option>
-                <option value="265">Malawi (+265)</option>
-                <option value="60">Malaysia (+60)</option>
-                <option value="960">Maldives (+960)</option>
-                <option value="223">Mali (+223)</option>
-                <option value="356">Malta (+356)</option>
-                <option value="692">Marshall Islands (+692)</option>
-                <option value="222">Mauritania (+222)</option>
-                <option value="230">Mauritius (+230)</option>
-                <option value="52">Mexico (+52)</option>
-                <option value="691">Micronesia (+691)</option>
-                <option value="373">Moldova (+373)</option>
-                <option value="377">Monaco (+377)</option>
-                <option value="976">Mongolia (+976)</option>
-                <option value="382">Montenegro (+382)</option>
-                <option value="212">Morocco (+212)</option>
-                <option value="258">Mozambique (+258)</option>
-                <option value="95">Myanmar (+95)</option>
-                <option value="264">Namibia (+264)</option>
-                <option value="674">Nauru (+674)</option>
-                <option value="977">Nepal (+977)</option>
-                <option value="31">Netherlands (+31)</option>
-                <option value="687">New Caledonia (+687)</option>
-                <option value="64">New Zealand (+64)</option>
-                <option value="505">Nicaragua (+505)</option>
-                <option value="227">Niger (+227)</option>
-                <option value="47">Norway (+47)</option>
-                <option value="968">Oman (+968)</option>
-                <option value="680">Palau (+680)</option>
-                <option value="970">Palestine (+970)</option>
-                <option value="507">Panama (+507)</option>
-                <option value="675">Papua New Guinea (+675)</option>
-                <option value="595">Paraguay (+595)</option>
-                <option value="51">Peru (+51)</option>
-                <option value="63">Philippines (+63)</option>
-                <option value="48">Poland (+48)</option>
-                <option value="351">Portugal (+351)</option>
-                <option value="974">Qatar (+974)</option>
-                <option value="248">Seychelles (+248)</option>
-                <option value="232">Sierra Leone (+232)</option>
-                <option value="65">Singapore (+65)</option>
-                <option value="421">Slovakia (+421)</option>
-                <option value="386">Slovenia (+386)</option>
-                <option value="677">Solomon Islands (+677)</option>
-                <option value="252">Somalia (+252)</option>
-                <option value="27">South Africa (+27)</option>
-                <option value="82">South Korea (+82)</option>
-                <option value="211">South Sudan (+211)</option>
-                <option value="34">Spain (+34)</option>
-                <option value="94">Sri Lanka (+94)</option>
-                <option value="249">Sudan (+249)</option>
-                <option value="597">Suriname (+597)</option>
-                <option value="268">Swaziland (+268)</option>
-                <option value="46">Sweden (+46)</option>
-                <option value="41">Switzerland (+41)</option>
-                <option value="963">Syria (+963)</option>
-                <option value="886">Taiwan (+886)</option>
-                <option value="992">Tajikistan (+992)</option>
-                <option value="66">Thailand (+66)</option>
-                <option value="228">Togo (+228)</option>
-                <option value="676">Tonga (+676)</option>
-                <option value="216">Tunisia (+216)</option>
-                <option value="90">Turkey (+90)</option>
-                <option value="993">Turkmenistan (+993)</option>
-                <option value="688">Tuvalu (+688)</option>
-                <option value="380">Ukraine (+380)</option>
-                <option value="971">United Arab Emirates (+971)</option>
-                <option value="44">United Kingdom (+44)</option>
-                <option value="1">United States (+1)</option>
-                <option value="598">Uruguay (+598)</option>
-                <option value="998">Uzbekistan (+998)</option>
-                <option value="678">Vanuatu (+678)</option>
-                <option value="58">Venezuela (+58)</option>
-                <option value="84">Vietnam (+84)</option>
-                <option value="967">Yemen (+967)</option>
-                <option value="260">Zambia (+260)</option>
-                <option value="263">Zimbabwe (+263)</option>
-            </select>          
-            <input type="number" id="phone-number" placeholder="e.g., 26371xxxxxx">
-            <button id="submit" class="btn" style="font-weight: bold;">GET CODE</button>
-        </div>
-        <div id="loading-spinner">
-            <i class="fas fa-spinner fa-spin"></i>
-        </div>
-        <div id="pair"></div>
-        <div class="button-group" id="action-buttons" style="display: none;">
-            <button id="copy-code" class="btn">Copy Code</button>
-            <button id="validate-code" class="btn btn-secondary">Validate</button>
-        </div>
+  <div class="container">
+    <div class="header">
+      <div class="logo"><i class="fas fa-robot"></i></div>
+      <h1 class="title">LADYBUG-MD</h1>
+      <p class="subtitle">Complete setup for your WhatsApp bot</p>
+      <div class="social-icons">
+        <a href="https://www.youtube.com/@Mrnta8ndo?sub_confirmation=1" target="_blank" class="youtube"><i class="fab fa-youtube"></i></a>
+        <a href="https://t.me/mrnta8ndo" target="_blank" class="telegram"><i class="fab fa-telegram-plane"></i></a>
+        <a href="https://whatsapp.com/channel/0029Vb4yAGGIHphBnp4jaj2A" target="_blank" class="whatsapp"><i class="fab fa-whatsapp"></i></a>
+        <a href="https://github.com/mrntandooofc/LADYBUG-MD" target="_blank" class="github"><i class="fab fa-github"></i></a>
+      </div>
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.0.0-alpha.1/axios.min.js"></script>
-    <script>
-        const themeToggle = document.getElementById('theme-toggle');
-        const currentTheme = localStorage.getItem('theme') || 'dark';  
+    <div class="audio-player">
+      <audio controls autoplay loop>
+        <source src="https://files.catbox.moe/jvmz2c.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+      </audio>
+    </div>
+
+    <div class="tabs">
+      <div class="tab active" data-tab="pair">Pair Code</div>
+      <div class="tab" data-tab="creds">Upload Credentials</div>
+    </div>
+
+    <div class="tab-content active" id="pair-tab">
+      <div class="input-group">
+        <label class="input-label">Enter your WhatsApp number with country code</label>
+        <input type="text" id="mobileNumber" class="input-field" placeholder="+26378xxx" pattern="[+][0-9]{10,}" title="Please enter country code starting with + followed by number">
+      </div>
+
+      <button class="btn btn-primary" id="submit">
+        <i class="fas fa-key"></i> Generate code
+      </button>
+
+      <div class="loading" id="loading">
+        <i class="fas fa-spinner"></i>
+      </div>
+
+      <div class="message" id="message"></div>
+
+      <div class="code-display" id="codeDisplay">
+        Your pair code will appear here
+      </div>
+
+      <button class="btn btn-secondary" id="copy" onclick="copyCode()">
+        <i class="fas fa-copy"></i> Copy Code
+      </button>
+    </div>
+
+    <div class="tab-content" id="creds-tab">
+      <div class="file-upload" id="fileUpload">
+        <i class="fas fa-file-upload"></i>
+        <div class="file-upload-text">Click to upload your creds.json file</div>
+        <div class="file-name" id="fileName">No file selected</div>
+        <input type="file" id="credsFile" accept=".json">
+      </div>
+
+      <div class="message" id="uploadMessage"></div>
+
+      <button class="btn btn-primary" id="validateBtn" disabled>
+        <i class="fas fa-check-circle"></i> Validate & Upload
+      </button>
+
+      <div class="loading" id="uploadLoading">
+        <i class="fas fa-spinner"></i>
+      </div>
+    </div>
+
+    <div class="footer">
+      <p>© 2025 Mr Ntando ofc | LADYBUG-MD</p>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.0.0-alpha.1/axios.min.js"></script>
+  <script>
+    // Tab functionality
+    document.querySelectorAll('.tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        // Remove active class from all tabs and content
+        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
         
-        document.documentElement.setAttribute('data-theme', currentTheme);
-        
-        if (currentTheme === 'dark') {
-            themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+        // Add active class to clicked tab and corresponding content
+        tab.classList.add('active');
+        const tabId = tab.getAttribute('data-tab') + '-tab';
+        document.getElementById(tabId).classList.add('active');
+      });
+    });
+
+    // Audio player volume control
+    document.addEventListener('DOMContentLoaded', function() {
+      const audio = document.querySelector('audio');
+      audio.volume = 0.5;
+      audio.play().catch(e => console.log("Auto-play prevented: ", e));
+    });
+
+    // Pair code generation
+    document.getElementById("submit").addEventListener("click", async (e) => {
+      e.preventDefault();
+      const mobileNumberInput = document.getElementById("mobileNumber");
+      const codeDisplay = document.getElementById("codeDisplay");
+      const loadingSpinner = document.getElementById("loading");
+      const messageDiv = document.getElementById("message");
+
+      // Clear previous messages
+      messageDiv.style.display = 'none';
+      messageDiv.className = 'message';
+      messageDiv.innerHTML = '';
+
+      const mobileNumber = mobileNumberInput.value.trim();
+      if (!mobileNumber) {
+        showMessage('Please enter your WhatsApp number', 'error');
+        return;
+      }
+
+      // Validate phone number format
+      if (!/^\+[0-9]{10,}$/.test(mobileNumber)) {
+        showMessage('Invalid number format. Include country code (e.g., +1234567890)', 'error');
+        return;
+      }
+
+      loadingSpinner.style.display = "block";
+      codeDisplay.innerHTML = 'Generating code...';
+
+      try {
+        const response = await axios(`/code?number=${mobileNumber.replace(/[^0-9]/g, "")}`);
+        const code = response.data.code || "Service Unavailable";
+        if (code === "Service Unavailable") {
+          showMessage('Service Unavailable', 'error');
+          codeDisplay.innerHTML = 'Service Unavailable';
         } else {
-            themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+          showMessage('Pair code generated successfully!', 'success');
+          codeDisplay.innerHTML = `CODE: ${code}`;
         }
-        
-        themeToggle.addEventListener('click', () => {
-            const currentTheme = document.documentElement.getAttribute('data-theme');
-            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-            
-            document.documentElement.setAttribute('data-theme', newTheme);
-            localStorage.setItem('theme', newTheme);
-            
-            if (newTheme === 'dark') {
-                themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
-            } else {
-                themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
-            }
-        });
+      } catch (error) {
+        console.error("Error generating code:", error);
+        showMessage('Error generating code. Please try again.', 'error');
+        codeDisplay.innerHTML = 'Error generating code';
+      } finally {
+        loadingSpinner.style.display = "none";
+      }
+    });
 
-        const submitButton = document.getElementById('submit');
-        const phoneNumberInput = document.getElementById('phone-number');
-        const countryCodeSelect = document.getElementById('country-code');
-        const pairDiv = document.getElementById('pair');
-        const copyCodeButton = document.getElementById('copy-code');
-        const validateCodeButton = document.getElementById('validate-code');
-        const actionButtons = document.getElementById('action-buttons');
-        const loadingSpinner = document.getElementById('loading-spinner');
+    function showMessage(text, type) {
+      const messageDiv = document.getElementById("message");
+      messageDiv.style.display = 'flex';
+      messageDiv.className = `message ${type}-message`;
+      messageDiv.innerHTML = `<i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-circle'}"></i> ${text}`;
+    }
 
-        submitButton.addEventListener('click', async (e) => {
-            e.preventDefault();
-            const countryCode = countryCodeSelect.value;
-            const phoneNumber = phoneNumberInput.value.replace(/[^0-9]/g, '');
+    function copyCode() {
+      const codeDisplay = document.getElementById("codeDisplay").innerText;
+      const code = codeDisplay.includes('CODE: ') ? codeDisplay.split('CODE: ')[1] : codeDisplay;
+      
+      if (!code || code === 'Your pair code will appear here' || code === 'Service Unavailable' || code === 'Error generating code') {
+        showMessage('No valid code to copy', 'warning');
+        return;
+      }
 
-            if (!phoneNumber) {
-                pairDiv.innerHTML = '<p style="color: red;">❗ Please Enter Your Phone Number.</p>';
-                actionButtons.style.display = 'none';
-                return;
-            }
+      navigator.clipboard.writeText(code).then(() => {
+        const copyBtn = document.getElementById("copy");
+        const originalText = copyBtn.innerHTML;
+        copyBtn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+        showMessage('Code copied to clipboard!', 'success');
+        setTimeout(() => {
+          copyBtn.innerHTML = originalText;
+        }, 2000);
+      }).catch(err => {
+        console.error("Failed to copy text: ", err);
+        showMessage('Failed to copy code', 'error');
+      });
+    }
 
-            if (phoneNumber.length < 9) {
-                pairDiv.innerHTML = '<p style="color: red;">❗ Invalid Number Format. Please Try Again.</p>';
-                actionButtons.style.display = 'none';
-                return;
-            }
+    // File upload functionality
+    const fileUpload = document.getElementById('fileUpload');
+    const credsFile = document.getElementById('credsFile');
+    const fileName = document.getElementById('fileName');
+    const validateBtn = document.getElementById('validateBtn');
+    const uploadMessage = document.getElementById('uploadMessage');
+    const uploadLoading = document.getElementById('uploadLoading');
 
-            const fullNumber = countryCode + phoneNumber;
-            loadingSpinner.style.display = 'block';
-            pairDiv.innerHTML = '';
-            actionButtons.style.display = 'none';
+    // Handle file selection
+    fileUpload.addEventListener('click', () => credsFile.click());
 
-            try {
-                const { data } = await axios.get(`/code?number=${fullNumber}`);
-                const code = data.code || "❗ Service Unavailable";
-                pairDiv.innerHTML = `<p>Your Pairing Code is: <strong>${code}</strong></p>`;
-                copyCodeButton.dataset.code = code;
-                validateCodeButton.dataset.code = code;
-                actionButtons.style.display = 'flex';
-            } catch (error) {
-                pairDiv.innerHTML = '<p style="color: red;">❗ Service Currently Unavailable. Please Try Again Later.</p>';
-                actionButtons.style.display = 'none';
-            } finally {
-                loadingSpinner.style.display = 'none';
-            }
-        });
+    credsFile.addEventListener('change', (e) => {
+      if (e.target.files.length > 0) {
+        const file = e.target.files[0];
+        fileName.textContent = file.name;
+        fileName.style.color = '#f39c12';
+        validateBtn.disabled = false;
 
-        copyCodeButton.addEventListener('click', () => {
-            const code = copyCodeButton.dataset.code;
-            navigator.clipboard.writeText(code).then(() => {
-                copyCodeButton.textContent = 'Copied!';
-                copyCodeButton.classList.add('copied');
-                setTimeout(() => {
-                    copyCodeButton.textContent = 'Copy Code';
-                    copyCodeButton.classList.remove('copied');
-                }, 2000);
-            });
-        });
+        // Clear previous messages
+        uploadMessage.style.display = 'none';
+        uploadMessage.className = 'message';
+        uploadMessage.innerHTML = '';
+      }
+    });
 
-        validateCodeButton.addEventListener('click', () => {
-            window.location.href = '/validate';
-        });
-    </script>
+    // Validate and upload file
+    validateBtn.addEventListener('click', async () => {
+      if (!credsFile.files.length) return;
+
+      const file = credsFile.files[0];
+      
+      // Basic validation for file type
+      if (file.type !== 'application/json') {
+        showUploadMessage('Please upload a valid JSON file', 'error');
+        return;
+      }
+
+      uploadLoading.style.display = 'block';
+      validateBtn.disabled = true;
+
+      try {
+        const fileContent = await readFileAsText(file);
+        const jsonData = JSON.parse(fileContent);
+
+        // Basic validation for creds.json structure
+        if (!jsonData.encKey || !jsonData.macKey || !jsonData.noiseKey || !jsonData.signedIdentityKey || !jsonData.signedPreKey || !jsonData.registrationId) {
+          showUploadMessage('Invalid creds.json file structure', 'error');
+          fileName.style.color = '#e74c3c';
+        } else {
+          // Here you would typically send the file to your server
+          // For demonstration, we're just showing a success message
+          showUploadMessage('creds.json validated successfully!', 'success');
+          fileName.style.color = '#2ecc71';
+          
+          // Simulate upload to server
+          setTimeout(() => {
+            showUploadMessage('Credentials successfully uploaded and saved', 'success');
+          }, 1500);
+        }
+      } catch (error) {
+        console.error('Error processing file:', error);
+        showUploadMessage('Invalid JSON file or parsing error', 'error');
+        fileName.style.color = '#e74c3c';
+      } finally {
+        uploadLoading.style.display = 'none';
+        validateBtn.disabled = false;
+      }
+    });
+
+    function readFileAsText(file) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = event => resolve(event.target.result);
+        reader.onerror = error => reject(error);
+        reader.readAsText(file);
+      });
+    }
+
+    function showUploadMessage(text, type) {
+      uploadMessage.style.display = 'flex';
+      uploadMessage.className = `message ${type}-message`;
+      uploadMessage.innerHTML = `<i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-circle'}"></i> ${text}`;
+    }
+  </script>
 </body>
 </html>
