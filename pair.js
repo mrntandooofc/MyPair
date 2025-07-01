@@ -1,122 +1,186 @@
 import express from 'express';
-import fs from 'fs';
+import fs from 'fs/promises';
+import path from 'path';
 import pino from 'pino';
-import { makeWASocket, useMultiFileAuthState, delay, makeCacheableSignalKeyStore, Browsers, jidNormalizedUser } from '@whiskeysockets/baileys';
+import { 
+    makeWASocket, 
+    useMultiFileAuthState, 
+    delay, 
+    makeCacheableSignalKeyStore, 
+    Browsers, 
+    jidNormalizedUser 
+} from '@whiskeysockets/baileys';
 
 const router = express.Router();
+const logger = pino({ level: process.env.NODE_ENV === 'production' ? 'error' : 'info' });
 
-// Ensure the session directory exists
-function removeFile(FilePath) {
+const SESSION_TIMEOUT = 300000; // 5 minutes
+const RECONNECT_INTERVAL = 5000;
+
+async function cleanupSession(dir) {
     try {
-        if (!fs.existsSync(FilePath)) return false;
-        fs.rmSync(FilePath, { recursive: true, force: true });
-    } catch (e) {
-        console.error('Error removing file:', e);
+        await fs.rm(dir, { recursive: true, force: true });
+    } catch (error) {
+        logger.error(`Error cleaning up session: ${error.message}`);
     }
 }
 
+function formatPhoneNumber(num) {
+    // Remove all non-digit characters except plus sign
+    let formatted = num.replace(/[^\d+]/g, '');
+    
+    // Remove leading + if present
+    if (formatted.startsWith('+')) {
+        formatted = formatted.substring(1);
+    }
+    
+    // Add default country code if missing
+    if (!formatted.match(/^[1-9]\d{1,2}/)) {
+        formatted = '62' + formatted;
+    }
+    
+    return formatted;
+}
+
 router.get('/', async (req, res) => {
-    let num = req.query.number;
-    let dirs = './' + (num || `session`);
-    
-    // Remove existing session if present
-    await removeFile(dirs);
-    
-    async function initiateSession() {
-        const { state, saveCreds } = await useMultiFileAuthState(dirs);
+    try {
+        let { number } = req.query;
+        
+        if (!number) {
+            return res.status(400).json({ error: 'Phone number is required' });
+        }
 
-        try {
-            let KnightBot = makeWASocket({
-                auth: {
-                    creds: state.creds,
-                    keys: makeCacheableSignalKeyStore(state.keys, pino({ level: "fatal" }).child({ level: "fatal" })),
-                },
-                printQRInTerminal: false,
-                logger: pino({ level: "fatal" }).child({ level: "fatal" }),
-                browser: Browsers.windows('Firefox'),
-            });
+        const sessionDir = path.join(process.cwd(), `session_${number}`);
+        await cleanupSession(sessionDir);
 
-            if (!KnightBot.authState.creds.registered) {
-                await delay(2000);
-                // Remove any non-digit characters except plus sign
-                num = num.replace(/[^\d+]/g, '');
-                
-                // If number starts with +, remove it
-                if (num.startsWith('+')) {
-                    num = num.substring(1);
-                }
-                
-                // If number doesn't start with a country code, add default
-                if (!num.match(/^[1-9]\d{1,2}/)) {
-                    num = '62' + num;
-                }
-                
-                const code = await KnightBot.requestPairingCode(num);
-                if (!res.headersSent) {
-                    console.log({ num, code });
-                    await res.send({ code });
-                }
+        const { state, saveCreds } = await useMultiFileAuthState(sessionDir);
+        const socketConfig = {
+            auth: {
+                creds: state.creds,
+                keys: makeCacheableSignalKeyStore(state.keys, logger.child({ level: 'fatal' })),
+            },
+            printQRInTerminal: false,
+            logger: logger.child({ level: 'fatal' }),
+            browser: Browsers.windows('Firefox'),
+            connectTimeout: SESSION_TIMEOUT
+        };
+
+        const sock = makeWASocket(socketConfig);
+
+        // Handle pairing if not registered
+        if (!sock.authState.creds.registered) {
+            await delay(2000);
+            number = formatPhoneNumber(number);
+            
+            try {
+                const code = await sock.requestPairingCode(number);
+                return res.json({ 
+                    status: 'pairing', 
+                    pairingCode: code,
+                    message: 'Please enter this pairing code in your WhatsApp app'
+                });
+            } catch (error) {
+                logger.error(`Pairing error: ${error.message}`);
+                await cleanupSession(sessionDir);
+                return res.status(500).json({ error: 'Failed to generate pairing code' });
             }
+        }
 
-            KnightBot.ev.on('creds.update', saveCreds);
-            KnightBot.ev.on("connection.update", async (s) => {
-                const { connection, lastDisconnect } = s;
+        // Event handlers
+        sock.ev.on('creds.update', saveCreds);
+        
+        sock.ev.on("connection.update", async (update) => {
+            const { connection, lastDisconnect } = update;
 
-                if (connection === "open") {
-                    await delay(10000);
-                    const sessionKnight = fs.readFileSync(dirs + '/creds.json');
-
-                    // Send session file to user
-                    const userJid = jidNormalizedUser(num + '@s.whatsapp.net');
-                    await KnightBot.sendMessage(userJid, { 
-                        document: sessionKnight, 
+            if (connection === "open") {
+                logger.info('Connection established');
+                
+                try {
+                    const userJid = jidNormalizedUser(`${number}@s.whatsapp.net`);
+                    const credsPath = path.join(sessionDir, 'creds.json');
+                    
+                    // Delay to ensure everything is ready
+                    await delay(5000);
+                    
+                    // Send session file
+                    const sessionData = await fs.readFile(credsPath);
+                    await sock.sendMessage(userJid, { 
+                        document: sessionData, 
                         mimetype: 'application/json', 
                         fileName: 'creds.json' 
                     });
-
-                    // Send welcome message
-                    await KnightBot.sendMessage(userJid, { 
-                        text: `contant creator\n\n wa.me/263771629199` 
+                    
+                    // Send informational messages
+                    await sock.sendMessage(userJid, { 
+                        text: `*Important Instructions*\n\n` +
+                              `🔒 Keep your session file secure\n` +
+                              `☠️ NEVER SHARE WITH ANYONE\n\n` +
+                              `Contact developer: wa.me/263777124998` 
                     });
-
-                    // Send warning message
-                    await KnightBot.sendMessage(userJid, { 
-                        text: `☠️DONT SHARE WITH ANYONE☠️
-                        ©LADYBUG-MD-BOT-INC
-                         ⳹\n\n` 
-                    });
-
-                    // Clean up session after use
-                    await delay(100);
-                    removeFile(dirs);
+                    
+                    // Cleanup
+                    await delay(1000);
+                    await cleanupSession(sessionDir);
                     process.exit(0);
+                    
+                } catch (error) {
+                    logger.error(`Session transfer error: ${error.message}`);
+                    await cleanupSession(sessionDir);
+                    process.exit(1);
                 }
-                if (connection === "close" && lastDisconnect && lastDisconnect.error && lastDisconnect.error.output.statusCode != 401) {
-                    initiateSession();
-                }
-            });
-        } catch (err) {
-            console.error('Error initializing session:', err);
-            if (!res.headersSent) {
-                res.status(503).send({ code: 'Service Unavailable' });
             }
+            
+            if (connection === "close") {
+                if (lastDisconnect?.error?.output?.statusCode !== 401) {
+                    logger.info('Attempting to reconnect...');
+                    await delay(RECONNECT_INTERVAL);
+                    router.get('/', req, res); // Reinitiate session
+                } else {
+                    logger.error('Authentication failed, please restart');
+                    await cleanupSession(sessionDir);
+                }
+            }
+        });
+        
+        // Set timeout for session initialization
+        setTimeout(async () => {
+            if (!sock.authState.creds.registered) {
+                logger.warn('Session initialization timed out');
+                await cleanupSession(sessionDir);
+                if (!res.headersSent) {
+                    res.status(408).json({ error: 'Session initialization timed out' });
+                }
+            }
+        }, SESSION_TIMEOUT);
+
+    } catch (error) {
+        logger.error(`Initialization error: ${error.message}`);
+        if (!res.headersSent) {
+            res.status(500).json({ error: 'Failed to initialize session' });
         }
     }
-
-    await initiateSession();
 });
 
-// Global uncaught exception handler
-process.on('uncaughtException', (err) => {
-    let e = String(err);
-    if (e.includes("conflict")) return;
-    if (e.includes("not-authorized")) return;
-    if (e.includes("Socket connection timeout")) return;
-    if (e.includes("rate-overlimit")) return;
-    if (e.includes("Connection Closed")) return;
-    if (e.includes("Timed Out")) return;
-    if (e.includes("Value not found")) return;
-    console.log('Caught exception: ', err);
+// Error handling
+process.on('uncaughtException', (error) => {
+    const ignoreErrors = [
+        "conflict",
+        "not-authorized",
+        "Socket connection timeout",
+        "rate-overlimit",
+        "Connection Closed",
+        "Timed Out",
+        "Value not found"
+    ];
+    
+    if (!ignoreErrors.some(e => error.message.includes(e))) {
+        logger.fatal(`Uncaught Exception: ${error.message}`);
+        process.exit(1);
+    }
+});
+
+process.on('unhandledRejection', (reason) => {
+    logger.error(`Unhandled Rejection: ${reason}`);
 });
 
 export default router;
