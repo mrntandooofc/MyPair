@@ -3,20 +3,17 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>LADYBUG MD PAIR SYSTEM</title>
+  <title>LADYBUG-MD-BOT-PAIR</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
   <style>
     :root {
-      --primary-color: #FF3B30;
-      --secondary-color: #FF9500;
-      --accent-color: #FF453A;
-      --text-color: #1C1C1E;
-      --background-color: #F5F5F7;
-      --hover-color: #E5E5EA;
+      --primary-color: #fffff;
+      --secondary-color: #ffffff;
+      --accent-color: #000000;
+      --text-color: #000000;
+      --background-color: #4DB6AC;
+      --hover-color: #f5f5f5;
       --border-color: rgba(0, 0, 0, 0.1);
-      --success-color: #34C759;
-      --error-color: #FF3B30;
-      --warning-color: #FF9500;
     }
 
     * {
@@ -26,370 +23,195 @@
     }
 
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-      background-color: #000;
+      font-family: 'Inter', sans-serif;
+      background: var(--background-color);
       color: var(--text-color);
       min-height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
       padding: 15px;
-      overflow: hidden;
-      position: relative;
-    }
-
-    .ladybug-animation {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      top: 0;
-      left: 0;
-      z-index: 0;
-      overflow: hidden;
-    }
-
-    .ladybug {
-      position: absolute;
-      width: 40px;
-      height: 40px;
-      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="%23FF3B30"/><circle cx="50" cy="50" r="30" fill="%23FFFFFF"/><path d="M50 20 Q65 40 50 60 Q35 40 50 20" fill="%231C1C1E"/><circle cx="35" cy="40" r="5" fill="%231C1C1E"/><circle cx="65" cy="40" r="5" fill="%231C1C1E"/></svg>');
-      background-size: contain;
-      animation: fly linear infinite;
-      opacity: 0.7;
-      filter: drop-shadow(0 0 5px rgba(255, 59, 48, 0.7));
-    }
-
-    @keyframes fly {
-      0% {
-        transform: translate(0, 0) rotate(0deg);
-      }
-      100% {
-        transform: translate(calc(100vw + 100px), calc(-100vh - 100px)) rotate(360deg);
-      }
     }
 
     .container {
       width: 100%;
-      max-width: 450px;
-      background: rgba(245, 245, 247, 0.9);
-      border-radius: 20px;
-      padding: 30px;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      position: relative;
-      z-index: 1;
-      backdrop-filter: blur(10px);
-      transform-style: preserve-3d;
-      perspective: 1000px;
+      max-width: 400px;
+      background: var(--background-color);
+      border-radius: 16px;
+      padding: 25px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+      border: 1px solid var(--border-color);
     }
 
     .header {
       text-align: center;
-      margin-bottom: 30px;
-      animation: fadeIn 0.8s ease-out;
+      margin-bottom: 25px;
     }
 
     .logo {
-      width: 90px;
-      height: 90px;
-      margin: 0 auto 20px;
-      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-      border-radius: 25px;
+      width: 70px;
+      height: 70px;
+      margin: 0 auto 16px;
+      background: var(--primary-color);
+      border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 40px;
+      font-size: 28px;
       color: white;
-      box-shadow: 0 8px 24px rgba(255, 59, 48, 0.3);
-      transform: rotateY(0deg);
-      transition: transform 0.6s ease, box-shadow 0.6s ease;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .logo:hover {
-      transform: rotateY(180deg);
-      box-shadow: 0 8px 24px rgba(255, 149, 0, 0.3);
-    }
-
-    .logo::after {
-      content: '';
-      position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: linear-gradient(
-        transparent,
-        rgba(255, 255, 255, 0.1),
-        transparent
-      );
-      transform: rotate(45deg);
-      animation: shine 3s infinite;
-    }
-
-    @keyframes shine {
-      0% {
-        left: -50%;
-      }
-      100% {
-        left: 150%;
-      }
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
     }
 
     .title {
-      font-size: 32px;
-      font-weight: 800;
+      font-size: 24px;
+      font-weight: 700;
       margin-bottom: 8px;
-      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      color: var(--primary-color);
     }
 
     .subtitle {
-      font-size: 15px;
-      color: rgba(28, 28, 30, 0.7);
-      margin-bottom: 25px;
-      font-weight: 500;
+      font-size: 14px;
+      color: rgba(0, 0, 0, 0.7);
+      margin-bottom: 20px;
     }
 
     .social-icons {
       display: flex;
       justify-content: center;
-      gap: 15px;
-      margin-bottom: 25px;
+      gap: 12px;
+      margin-bottom: 20px;
     }
 
     .social-icons a {
-      width: 50px;
-      height: 50px;
-      border-radius: 15px;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      color: white;
-      font-size: 22px;
+      color: #fff;
+      font-size: 18px;
       text-decoration: none;
-      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
     }
+
+    .social-icons a.youtube { background: #FF0000; }
+    .social-icons a.telegram { background: #0088cc; }
+    .social-icons a.whatsapp { background: #0cfa10; }
+    .social-icons a.github { background: #333; }
 
     .social-icons a:hover {
-      transform: translateY(-5px) scale(1.1);
-      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+      transform: scale(1.1);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
     }
 
-    .social-icons a.youtube { background: linear-gradient(135deg, #FF0000, #FF5E5E); }
-    .social-icons a.telegram { background: linear-gradient(135deg, #0088cc, #00ACE9); }
-    .social-icons a.whatsapp { background: linear-gradient(135deg, #25D366, #0cfa10); }
-    .social-icons a.github { background: linear-gradient(135deg, #333, #666); }
-
     .input-group {
-      margin-bottom: 25px;
-      animation: fadeIn 0.8s ease-out 0.1s both;
+      margin-bottom: 20px;
     }
 
     .input-label {
       display: block;
-      margin-bottom: 10px;
-      font-weight: 600;
-      font-size: 14px;
-      color: var(--text-color);
+      margin-bottom: 8px;
+      font-weight: 500;
+      font-size: 13px;
     }
 
     .input-field {
       width: 100%;
-      padding: 15px;
-      border: 2px solid rgba(0, 0, 0, 0.1);
-      border-radius: 15px;
-      background: rgba(255, 255, 255, 0.8);
+      padding: 12px;
+      border: 1.5px solid var(--border-color);
+      border-radius: 12px;
+      background: var(--background-color);
       color: var(--text-color);
-      font-size: 16px;
-      transition: all 0.3s ease;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      font-size: 15px;
     }
 
     .input-field:focus {
       outline: none;
       border-color: var(--primary-color);
-      box-shadow: 0 0 0 3px rgba(255, 59, 48, 0.2);
+      box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
     }
 
-    .file-upload {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 25px;
-      border: 3px dashed var(--hover-color);
-      border-radius: 15px;
-      margin-bottom: 25px;
-      transition: all 0.3s ease;
-      cursor: pointer;
-      background: rgba(255, 255, 255, 0.7);
-      animation: pulse 2s infinite;
-    }
-
-    @keyframes pulse {
-      0% { border-color: var(--hover-color); }
-      50% { border-color: var(--primary-color); }
-      100% { border-color: var(--hover-color); }
-    }
-
-    .file-upload:hover {
-      border-color: var(--primary-color);
-      background: rgba(255, 255, 255, 0.9);
-      animation: none;
-    }
-
-    .file-upload i {
-      font-size: 42px;
-      margin-bottom: 15px;
-      color: var(--primary-color);
-    }
-
-    .file-upload input {
-      display: none;
-    }
-
-    .file-upload-text {
-      text-align: center;
-      font-size: 15px;
-      font-weight: 500;
-      color: var(--text-color);
-    }
-
-    .file-name {
-      margin-top: 15px;
-      font-weight: 600;
-      word-break: break-all;
-      text-align: center;
-    }
-
-    .btn {
+    .generate-btn {
       width: 100%;
-      padding: 15px;
+      padding: 12px;
+      background: var(--primary-color);
       border: none;
-      border-radius: 15px;
-      font-size: 16px;
-      font-weight: 700;
+      border-radius: 12px;
+      color: var(--secondary-color);
+      font-size: 15px;
+      font-weight: 600;
       cursor: pointer;
-      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      position: relative;
-      overflow: hidden;
+      transition: all 0.3s ease;
+      margin-bottom: 16px;
     }
 
-    .btn::after {
-      content: '';
-      position: absolute;
-      top: -50%;
-      left: -60%;
-      width: 200%;
-      height: 200%;
-      background: rgba(255, 255, 255, 0.2);
-      transform: rotate(30deg);
-      transition: all 0.4s;
-    }
-
-    .btn:hover::after {
-      left: 100%;
-    }
-
-    .btn-primary {
-      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-      color: white;
-      box-shadow: 0 4px 12px rgba(255, 59, 48, 0.3);
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 20px rgba(255, 59, 48, 0.4);
-    }
-
-    .btn-secondary {
-      background: white;
-      border: 2px solid var(--hover-color);
-      color: var(--text-color);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    }
-
-    .btn-secondary:hover {
-      background: white;
-      border-color: var(--primary-color);
-      transform: translateY(-3px);
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    .generate-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     }
 
     .code-display {
-      background: white;
-      padding: 15px;
-      border-radius: 15px;
+      background: var(--hover-color);
+      padding: 12px;
+      border-radius: 12px;
       text-align: center;
-      font-size: 18px;
-      font-weight: 700;
-      margin-bottom: 20px;
-      min-height: 60px;
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 16px;
+      min-height: 40px;
       display: flex;
       align-items: center;
       justify-content: center;
-      border: 2px solid var(--hover-color);
-      word-break: break-all;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-      transition: all 0.3s ease;
+      border: 1.5px solid var(--border-color);
     }
 
-    .code-display:hover {
-      border-color: var(--primary-color);
-      box-shadow: 0 8px 24px rgba(255, 59, 48, 0.15);
-    }
-
-    .message {
-      display: none;
+    .copy-btn {
+      width: 100%;
       padding: 12px;
-      border-radius: 10px;
-      margin-bottom: 20px;
-      font-size: 14px;
+      background: var(--hover-color);
+      border: 1.5px solid var(--border-color);
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
       align-items: center;
       justify-content: center;
-      gap: 10px;
-      animation: slideIn 0.4s ease-out;
+      gap: 8px;
     }
 
-    @keyframes slideIn {
-      from { transform: translateY(-10px); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
+    .copy-btn:hover {
+      background: var(--background-color);
+      border-color: var(--primary-color);
     }
 
     .success-message {
-      color: var(--success-color);
-      background-color: rgba(52, 199, 89, 0.1);
-      border: 1px solid var(--success-color);
+      color: #000aff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-size: 16px;
     }
 
     .error-message {
-      color: var(--error-color);
-      background-color: rgba(255, 59, 48, 0.1);
-      border: 1px solid var(--error-color);
-    }
-
-    .warning-message {
-      color: var(--warning-color);
-      background-color: rgba(255, 149, 0, 0.1);
-      border: 1px solid var(--warning-color);
+      color: #e74c3c;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-size: 14px;
     }
 
     .loading {
       display: none;
       text-align: center;
-      margin: 20px 0;
+      margin: 16px 0;
     }
 
     .loading i {
-      font-size: 28px;
+      font-size: 24px;
       color: var(--primary-color);
       animation: spin 1s linear infinite;
     }
@@ -401,502 +223,111 @@
 
     .footer {
       text-align: center;
-      margin-top: 30px;
-      font-size: 13px;
-      color: rgba(28, 28, 30, 0.6);
-      animation: fadeIn 1s ease-out 0.2s both;
+      margin-top: 20px;
+      font-size: 12px;
+      color: rgba(0, 0, 0, 0.5);
     }
 
-    .audio-player {
-      width: 100%;
-      margin: 25px 0;
-      display: flex;
-      justify-content: center;
-      animation: fadeIn 0.8s ease-out 0.2s both;
-    }
-
-    audio {
-      border-radius: 15px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-      width: 100%;
-      max-width: 300px;
-    }
-
-    audio::-webkit-media-controls-panel {
-      background: linear-gradient(135deg, white, var(--hover-color));
-      border-radius: 15px;
-    }
-
-    .tabs {
-      display: flex;
-      margin-bottom: 25px;
-      border-bottom: 2px solid var(--hover-color);
-      animation: fadeIn 0.8s ease-out 0.1s both;
-    }
-
-    .tab {
-      padding: 12px 25px;
-      cursor: pointer;
-      font-weight: 600;
-      border-bottom: 4px solid transparent;
-      transition: all 0.3s ease;
-      color: rgba(28, 28, 30, 0.6);
-      position: relative;
-    }
-
-    .tab.active {
-      color: var(--primary-color);
-    }
-
-    .tab.active::after {
-      content: '';
-      position: absolute;
-      bottom: -4px;
-      left: 0;
-      width: 100%;
-      height: 4px;
-      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-      border-radius: 4px 4px 0 0;
-    }
-
-    .tab-content {
-      display: none;
-      animation: fadeIn 0.5s ease-out;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .tab-content.active {
-      display: block;
-    }
-
-    /* Particle animation for ladybugs */
-    @keyframes float {
-      0%, 100% {
-        transform: translateY(0) rotate(0deg);
-      }
-      50% {
-        transform: translateY(-20px) rotate(5deg);
-      }
-    }
-
-    /* Responsive styles */
     @media (max-width: 480px) {
       .container {
         padding: 20px;
-        border-radius: 15px;
-      }
-
-      .title {
-        font-size: 28px;
-      }
-
-      .logo {
-        width: 70px;
-        height: 70px;
-        font-size: 30px;
-      }
-
-      .social-icons a {
-        width: 44px;
-        height: 44px;
-        font-size: 20px;
+        border-radius: 12px;
       }
 
       .code-display {
         font-size: 16px;
-        min-height: 70px;
+        min-height: 50px;
       }
     }
   </style>
 </head>
 <body>
-  <div class="ladybug-animation" id="ladybugAnimation"></div>
-  
   <div class="container">
     <div class="header">
       <div class="logo"><i class="fas fa-robot"></i></div>
-      <h1 class="title">LADYBUG MD</h1>
-      <p class="subtitle">Advanced WhatsApp Bot Pairing System</p>
+      <h1 class="title">LADYBUG-MD</h1>
+      <p class="subtitle">Generate your WhatsApp pair code</p>
       <div class="social-icons">
-        <a href="https://www.youtube.com/@Mrnta8ndo?sub_confirmation=1" target="_blank" class="youtube"><i class="fab fa-youtube"></i></a>
-        <a href="https://t.me/mrnta8ndo" target="_blank" class="telegram"><i class="fab fa-telegram-plane"></i></a>
-        <a href="https://whatsapp.com/channel/0029Vb4yAGGIHphBnp4jaj2A" target="_blank" class="whatsapp"><i class="fab fa-whatsapp"></i></a>
-        <a href="https://github.com/mrntandooofc/LADYBUG-MD" target="_blank" class="github"><i class="fab fa-github"></i></a>
+        <a href="https://www.youtube.com/@praiseluke?sub_confirmation=1" target="_blank" class="youtube"><i class="fab fa-youtube"></i></a>
+        <a href="https://wa.me/+263780145644" target="_blank" class="WhatsApp"><i class="fab fa-telegram-plane"></i></a>
+        <a href="https://whatsapp.com/channel/0029Vb5nSebFy722d2NEeU3C" target="_blank" class="whatsapp"><i class="fab fa-whatsapp"></i></a>
+        <a href="https://github.com/SNOWBIRD0074/BEN-10-MD" target="_blank" class="github"><i class="fab fa-github"></i></a>
       </div>
     </div>
 
-    <div class="audio-player">
-      <audio controls autoplay loop>
-        <source src="https://files.catbox.moe/jvmz2c.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
-      </audio>
+    <div class="input-group">
+      <label class="input-label">Enter your WhatsApp number with country code</label>
+      <input type="text" id="mobileNumber" class="input-field" placeholder="+26378xxx" pattern="[+][0-9]{10,}" title="Please enter country code starting with + followed by number">
     </div>
 
-    <div class="tabs">
-      <div class="tab active" data-tab="pair">Pair Code</div>
-      <div class="tab" data-tab="creds">Upload Credentials</div>
+    <button class="generate-btn" id="submit">
+      <i class="fas fa-key"></i> Generate code
+    </button>
+
+    <div class="loading" id="loading">
+      <i class="fas fa-spinner"></i>
     </div>
 
-    <div class="tab-content active" id="pair-tab">
-      <div class="input-group">
-        <label class="input-label">Enter your WhatsApp number with country code</label>
-        <input type="text" id="mobileNumber" class="input-field" placeholder="+26378xxx" pattern="[+][0-9]{10,}" title="Please enter country code starting with + followed by number">
-      </div>
-
-      <button class="btn btn-primary" id="submit">
-        <i class="fas fa-key"></i> Generate Pair Code
-      </button>
-
-      <div class="loading" id="loading">
-        <i class="fas fa-spinner"></i>
-      </div>
-
-      <div class="message" id="message"></div>
-
-      <div class="code-display" id="codeDisplay">
-        <i class="fas fa-ladybug" style="color: var(--primary-color); margin-right: 10px;"></i>
-        Your pair code will appear here
-      </div>
-
-      <button class="btn btn-secondary" id="copy">
-        <i class="fas fa-copy"></i> Copy Code
-      </button>
+    <div class="code-display" id="codeDisplay">
+      Your pair code will appear here
     </div>
 
-    <div class="tab-content" id="creds-tab">
-      <div class="file-upload" id="fileUpload">
-        <i class="fas fa-file-upload"></i>
-        <div class="file-upload-text">Drag & drop or click to upload creds.json</div>
-        <div class="file-name" id="fileName">No file selected</div>
-        <input type="file" id="credsFile" accept=".json">
-      </div>
-
-      <div class="message" id="uploadMessage"></div>
-
-      <button class="btn btn-primary" id="validateBtn" disabled>
-        <i class="fas fa-check-circle"></i> Validate & Upload
-      </button>
-
-      <div class="loading" id="uploadLoading">
-        <i class="fas fa-spinner"></i>
-      </div>
-    </div>
+    <button class="copy-btn" id="copy" onclick="copyCode()">
+      <i class="fas fa-copy"></i> Copy Code
+    </button>
 
     <div class="footer">
-      <p>© 2024 LADYBUG MD | The Ultimate WhatsApp Bot</p>
+      <p>© 2025 SNOWBIRD OFC| BEN 10 MD</p>
     </div>
   </div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.0.0-alpha.1/axios.min.js"></script>
   <script>
-    // Create ladybug animation elements
-    function createLadybugs() {
-      const container = document.getElementById('ladybugAnimation');
-      const bugCount = Math.floor(window.innerWidth / 50);
-      
-      for (let i = 0; i < bugCount; i++) {
-        const ladybug = document.createElement('div');
-        ladybug.className = 'ladybug';
-        
-        // Random position and animation duration
-        const startX = Math.random() * -200;
-        const startY = Math.random() * window.innerHeight;
-        const duration = 30 + Math.random() * 90; // 30-120 seconds
-        const delay = Math.random() * 15; // 0-15 second delay
-        
-        ladybug.style.left = `${startX}px`;
-        ladybug.style.top = `${startY}px`;
-        ladybug.style.transform = `scale(${0.5 + Math.random()})`;
-        ladybug.style.animation = `fly ${duration}s linear ${delay}s infinite`;
-        
-        container.appendChild(ladybug);
-      }
-    }
-    
-    // Initialize ladybug animation
-    window.addEventListener('load', createLadybugs);
-    window.addEventListener('resize', () => {
-      document.getElementById('ladybugAnimation').innerHTML = '';
-      createLadybugs();
-    });
-
-    // Tab functionality
-    document.querySelectorAll('.tab').forEach(tab => {
-      tab.addEventListener('click', () => {
-        // Remove active class from all tabs and content
-        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-        document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-        
-        // Add active class to clicked tab and corresponding content
-        tab.classList.add('active');
-        const tabId = tab.getAttribute('data-tab') + '-tab';
-        document.getElementById(tabId).classList.add('active');
-      });
-    });
-
-    // Audio player volume control
-    document.addEventListener('DOMContentLoaded', function() {
-      const audio = document.querySelector('audio');
-      audio.volume = 0.3;
-      audio.play().catch(e => console.log("Auto-play prevented: ", e));
-    });
-
-    // Pair code generation
     document.getElementById("submit").addEventListener("click", async (e) => {
       e.preventDefault();
       const mobileNumberInput = document.getElementById("mobileNumber");
       const codeDisplay = document.getElementById("codeDisplay");
       const loadingSpinner = document.getElementById("loading");
-      const messageDiv = document.getElementById("message");
-
-      // Clear previous messages
-      messageDiv.style.display = 'none';
-      messageDiv.className = 'message';
-      messageDiv.innerHTML = '';
 
       const mobileNumber = mobileNumberInput.value.trim();
       if (!mobileNumber) {
-        showMessage('Please enter your WhatsApp number', 'error');
-        return;
-      }
-
-      // Validate phone number format
-      if (!/^\+[0-9]{10,}$/.test(mobileNumber)) {
-        showMessage('Invalid number format. Include country code (e.g., +1234567890)', 'error');
+        codeDisplay.innerHTML = '<div class="error-message"><i class="fas fa-exclamation-circle"></i> Please enter your WhatsApp number</div>';
         return;
       }
 
       loadingSpinner.style.display = "block";
-      codeDisplay.innerHTML = '<i class="fas fa-spinner fa-spin" style="margin-right: 10px;"></i> Generating your unique code...';
+      codeDisplay.innerHTML = '';
 
       try {
-        // Simulate API call with random code generation
-        await new Promise(resolve => setTimeout(resolve, 1500));
-        
-        // Generate a random 6-digit code
-        const code = Math.floor(100000 + Math.random() * 900000);
-        
-        showMessage('Pair code generated successfully!', 'success');
-        codeDisplay.innerHTML = `
-          <div style="display: flex; align-items: center;">
-            <i class="fas fa-ladybug" style="color: var(--primary-color); margin-right: 10px;"></i>
-            <div>
-              <div style="font-size: 12px; margin-bottom: 5px;">LADYBUG PAIR CODE</div>
-              <div style="font-size: 24px; font-weight: 800;">${code}</div>
-            </div>
-          </div>
-        `;
+        const response = await axios(`/code?number=${mobileNumber.replace(/[^0-9]/g, "")}`);
+        const code = response.data.code || "Service Unavailable";
+        if (code === "Service Unavailable") {
+          codeDisplay.innerHTML = '<div class="error-message"><i class="fas fa-exclamation-circle"></i> Service Unavailable</div>';
+        } else {
+          codeDisplay.innerHTML = `<div class="success-message"><i class="fas fa-check-circle"></i> CODE: ${code}</div>`;
+        }
       } catch (error) {
         console.error("Error generating code:", error);
-        showMessage('Error generating code. Please try again.', 'error');
-        codeDisplay.innerHTML = '<i class="fas fa-exclamation-triangle" style="margin-right: 10px;"></i> Error generating code';
+        codeDisplay.innerHTML = '<div class="error-message"><i class="fas fa-exclamation-circle"></i> Error generating code. Please try again.</div>';
       } finally {
         loadingSpinner.style.display = "none";
       }
     });
 
-    function showMessage(text, type) {
-      const messageDiv = document.getElementById("message");
-      messageDiv.style.display = 'flex';
-      messageDiv.className = `message ${type}-message`;
-      
-      let icon;
-      if (type === 'success') icon = '<i class="fas fa-check-circle"></i>';
-      else if (type === 'error') icon = '<i class="fas fa-times-circle"></i>';
-      else icon = '<i class="fas fa-exclamation-triangle"></i>';
-      
-      messageDiv.innerHTML = `${icon} ${text}`;
-    }
-
-    // Copy code functionality
-    document.getElementById("copy").addEventListener("click", function() {
-      const codeDisplay = document.getElementById("codeDisplay");
-      const codeText = codeDisplay.innerText;
-      const codeRegex = /\d{6}/;
-      const codeMatch = codeText.match(codeRegex);
-      
-      if (codeMatch) {
-        const code = codeMatch[0];
-        navigator.clipboard.writeText(code).then(() => {
-          const copyBtn = document.getElementById("copy");
-          const originalHTML = copyBtn.innerHTML;
-          copyBtn.innerHTML = '<i class="fas fa-check"></i> Copied!';
-          showMessage('Code copied to clipboard!', 'success');
-          
-          setTimeout(() => {
-            copyBtn.innerHTML = originalHTML;
-          }, 2000);
-        }).catch(err => {
-          console.error("Failed to copy:", err);
-          showMessage('Failed to copy code', 'error');
-        });
-      } else {
-        showMessage('No valid code to copy', 'warning');
-      }
-    });
-
-    // File upload functionality
-    const fileUpload = document.getElementById('fileUpload');
-    const credsFile = document.getElementById('credsFile');
-    const fileName = document.getElementById('fileName');
-    const validateBtn = document.getElementById('validateBtn');
-    const uploadMessage = document.getElementById('uploadMessage');
-    const uploadLoading = document.getElementById('uploadLoading');
-
-    // Drag and drop functionality
-    fileUpload.addEventListener('dragover', (e) => {
-      e.preventDefault();
-      fileUpload.style.borderColor = 'var(--primary-color)';
-      fileUpload.style.backgroundColor = 'rgba(255, 59, 48, 0.1)';
-    });
-
-    fileUpload.addEventListener('dragleave', () => {
-      fileUpload.style.borderColor = 'var(--hover-color)';
-      fileUpload.style.backgroundColor = 'rgba(255, 255, 255, 0.7)';
-    });
-
-    fileUpload.addEventListener('drop', (e) => {
-      e.preventDefault();
-      fileUpload.style.borderColor = 'var(--hover-color)';
-      fileUpload.style.backgroundColor = 'rgba(255, 255, 255, 0.7)';
-      
-      if (e.dataTransfer.files.length) {
-        credsFile.files = e.dataTransfer.files;
-        handleFileSelection();
-      }
-    });
-
-    fileUpload.addEventListener('click', () => credsFile.click());
-
-    function handleFileSelection() {
-      if (credsFile.files.length > 0) {
-        const file = credsFile.files[0];
-        fileName.textContent = file.name;
-        fileName.style.color = 'var(--warning-color)';
-        validateBtn.disabled = false;
-
-        // Clear previous messages
-        uploadMessage.style.display = 'none';
-        uploadMessage.className = 'message';
-        uploadMessage.innerHTML = '';
-      }
-    }
-
-    credsFile.addEventListener('change', handleFileSelection);
-
-    // Validate and upload file
-    validateBtn.addEventListener('click', async () => {
-      if (!credsFile.files.length) return;
-
-      const file = credsFile.files[0];
-      
-      // Basic validation for file type
-      if (file.type !== 'application/json') {
-        showUploadMessage('Please upload a valid JSON file', 'error');
-        return;
-      }
-
-      uploadLoading.style.display = 'block';
-      validateBtn.disabled = true;
-
-      try {
-        const fileContent = await readFileAsText(file);
-        const jsonData = JSON.parse(fileContent);
-
-        // Simulate validation delay
-        await new Promise(resolve => setTimeout(resolve, 1500));
-
-        // Check for basic creds.json structure
-        const requiredFields = ['encKey', 'macKey', 'noiseKey', 'signedIdentityKey', 'signedPreKey', 'registrationId'];
-        const isValid = requiredFields.every(field => jsonData[field]);
-        
-        if (isValid) {
-          showUploadMessage('creds.json validated successfully! Uploading...', 'success');
-          
-          // Simulate upload delay
-          await new Promise(resolve => setTimeout(resolve, 1000));
-          
-          showUploadMessage('Credentials successfully uploaded and saved!', 'success');
-          fileName.style.color = 'var(--success-color)';
-          
-          // Add animated checkmark effect
-          validateBtn.innerHTML = '<i class="fas fa-check"></i> Upload Successful!';
-          setTimeout(() => {
-            validateBtn.innerHTML = '<i class="fas fa-check-circle"></i> Validate & Upload';
-            validateBtn.disabled = false;
-          }, 2000);
-        } else {
-          showUploadMessage('Invalid creds.json file structure', 'error');
-          fileName.style.color = 'var(--error-color)';
-        }
-      } catch (error) {
-        console.error('Error processing file:', error);
-        showUploadMessage('Invalid JSON file or parsing error', 'error');
-        fileName.style.color = 'var(--error-color)';
-      } finally {
-        uploadLoading.style.display = 'none';
-        if (!validateBtn.innerHTML.includes('Successful')) {
-          validateBtn.disabled = false;
-        }
-      }
-    });
-
-    function readFileAsText(file) {
-      return new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.onload = event => resolve(event.target.result);
-        reader.onerror = error => reject(error);
-        reader.readAsText(file);
+    function copyCode() {
+      const codeDisplay = document.getElementById("codeDisplay").innerText;
+      const code = codeDisplay.replace('CODE: ', '');
+      navigator.clipboard.writeText(code).then(() => {
+        const copyBtn = document.getElementById("copy");
+        const originalText = copyBtn.innerHTML;
+        copyBtn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+        setTimeout(() => {
+          copyBtn.innerHTML = originalText;
+        }, 2000);
+      }).catch(err => {
+        console.error("Failed to copy text: ", err);
       });
     }
-
-    function showUploadMessage(text, type) {
-      uploadMessage.style.display = 'flex';
-      uploadMessage.className = `message ${type}-message`;
-      
-      let icon;
-      if (type === 'success') icon = '<i class="fas fa-check-circle"></i>';
-      else if (type === 'error') icon = '<i class="fas fa-times-circle"></i>';
-      else icon = '<i class="fas fa-exclamation-triangle"></i>';
-      
-      uploadMessage.innerHTML = `${icon} ${text}`;
-    }
-
-    // Animate elements on scroll
-    function animateOnScroll() {
-      const elements = document.querySelectorAll('.input-group, .btn, .code-display, .file-upload');
-      
-      elements.forEach(el => {
-        const elTop = el.getBoundingClientRect().top;
-        const windowHeight = window.innerHeight;
-        
-        if (elTop < windowHeight - 100) {
-          el.style.opacity = '1';
-          el.style.transform = 'translateY(0)';
-        }
-      });
-    }
-
-    // Initially hide elements for animation
-    document.querySelectorAll('.input-group, .btn, .code-display, .file-upload').forEach(el => {
-      el.style.opacity = '0';
-      el.style.transform = 'translateY(20px)';
-      el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-    });
-
-    // Run animations when page loads
-    window.addEventListener('load', () => {
-      setTimeout(() => {
-        animateOnScroll();
-      }, 300);
-    });
-
-    // Run animations on scroll
-    window.addEventListener('scroll', animateOnScroll);
   </script>
 </body>
 </html>
